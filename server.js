@@ -20,15 +20,17 @@ app.get('/new/:url(*)', function(req, res) {
 
   if (valid) {
     urlCount++;
+    const hostName = req.headers.host + (req.headers.host === 'localhost:5000' ? '' : 'https://');
     // add to the database and return info
     db.collection('urls').insert({
       original_url: url,
-      short_url: req.headers.host + '/' + urlCount.toString(36)
+      short_url: hostName + '/' + urlCount.toString(36)
     }, function(err, data) {
       if (err) {
         console.error(err);
         res.end();
       } else {
+        console.log(data);
         res.json({
           original_url: data.ops[0].original_url,
           short_url: data.ops[0].short_url
