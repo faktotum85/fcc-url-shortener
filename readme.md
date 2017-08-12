@@ -10,10 +10,10 @@
 `https://glacial-peak-36532.herokuapp.com/new/http://foo.com:80`
 
 ## Example creation output
-`{ "original_url":"http://foo.com:80", "short_url":"https://glacial-peak-36532.herokuapp.com/8170" }`
+`{ "original_url":"http://foo.com:80", "short_url":"https://glacial-peak-36532.herokuapp.com/2" }`
 
 ## Usage:
-`https://glacial-peak-36532.herokuapp.com/2871`
+`https://glacial-peak-36532.herokuapp.com/1`
 
 ## Will redirect to:
 `https://www.google.com/`

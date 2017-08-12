@@ -20,7 +20,7 @@ app.get('/new/:url(*)', function(req, res) {
 
   if (valid) {
     urlCount++;
-    const hostName = req.headers.host + (req.headers.host === 'localhost:5000' ? '' : 'https://');
+    const hostName = (req.headers.host === 'localhost:5000' ? '' : 'https://') + req.headers.host;
     // add to the database and return info
     db.collection('urls').insert({
       original_url: url,
