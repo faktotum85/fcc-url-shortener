@@ -6,6 +6,7 @@ const dbUrl = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/urlshortener
 const port = process.env.PORT || 8080;
 const app = express();
 
+const hostName = (req.headers.host === 'localhost:5000' ? '' : 'https://') + req.headers.host;
 let urlCount;
 let db;
 
@@ -20,7 +21,6 @@ app.get('/new/:url(*)', function(req, res) {
 
   if (valid) {
     urlCount++;
-    const hostName = (req.headers.host === 'localhost:5000' ? '' : 'https://') + req.headers.host;
     // add to the database and return info
     db.collection('urls').insert({
       original_url: url,
@@ -46,7 +46,7 @@ app.get('/new/:url(*)', function(req, res) {
 app.get('/:url(*)', function(req, res) {
   // check if url is in the database..
   db.collection('urls').findOne({
-    short_url: req.headers.host + '/' + req.params.url
+    short_url: hostName + '/' + req.params.url
   }, function (err, data) {
     if (err) {
       console.error(err);
